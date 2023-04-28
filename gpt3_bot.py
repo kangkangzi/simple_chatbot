@@ -5,21 +5,25 @@ import openai
 with open("openai.key", "r") as file:
     openai.api_key = file.read().strip()
 
+# Initialize the message list
+messages = [{"role": "system", "content": "You are a helpful assistant."}]
+
 # Define function to ask questions
 def question(sentence):
+    global messages
+    messages.append({"role": "user", "content": sentence})
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": sentence}
-        ],
+        messages=messages,
         temperature=0,
         max_tokens=1024,
         top_p=1.0,
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
-    return response['choices'][0]['message']['content']
+    answer = response['choices'][0]['message']['content']
+    messages.append({"role": "assistant", "content": answer})
+    return answer
 
 # Define function to print the answer
 def answer(sentence):
