@@ -1,6 +1,5 @@
 # Import OpenAI API
 import openai
-import os
 
 # Load OpenAI API key
 with open("openai.key", "r") as file:
