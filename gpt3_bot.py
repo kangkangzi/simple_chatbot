@@ -23,7 +23,7 @@ def question(sentence):
 
 # Define function to print the answer
 def answer(sentence):
-    print(">Answer:", question(sentence))
+    print("\033[36m>Answer: \033[0m", question(sentence))
     print("-------------------------")
 
 # Define main function
@@ -44,7 +44,7 @@ def main():
     for i in range(int(q_num)):
         # Get the question from terminal
         print("-------------------------")
-        q = input(">Question: ")
+        q = input("\033[35m>Question: \033[0m")
 
         # Ask the question and print the answer
         answer(q)
